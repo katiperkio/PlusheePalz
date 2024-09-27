@@ -10,8 +10,8 @@
     <div id="top_container">
         <header id="banner_top">
             <?php
-            include 'nav_inc.php';
-            include 'login_inc.php';
+                include 'nav_inc.php';
+                include 'login_inc.php';
             ?>
         </header>
     </div>
