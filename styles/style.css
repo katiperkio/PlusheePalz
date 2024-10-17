@@ -5,52 +5,132 @@
 }
 
 body {
-    margin: 0 auto;
+    background: radial-gradient(circle, #92eb4c 40%, transparent 41%),radial-gradient(circle at bottom left, #92eb4c 20%, transparent 21%),radial-gradient(circle at bottom right, #92eb4c 20%, transparent 21%),radial-gradient(circle at top left, #92eb4c 20%, transparent 21%),radial-gradient(circle at top right, #92eb4c 20%, transparent 21%);
+    background-size: 6em 6em;
+    background-color: #ffffff;
     color: #333;
-  background-image: radial-gradient(#73ff48 20%, transparent 20%),
-     radial-gradient(#73ff48 20%, transparent 20%);
-  background-color: #ffffff;
-  background-position: 0 0, 50px 50px;
-  background-size: 100px 100px;
-  height: 200px;
-  width: 100%;
+    font-family: 'Fredoka', sans-serif;
 }
 
-a {
-    text-decoration: none;
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-a:visited {
-    text-decoration: none;
-    color: #333;
+.logo {
+    border-radius: 50%;
+    width: 9rem;
+    position: absolute;
+    margin: 0.5rem;
 }
 
-#banner_top {
-    max-width: 100%;
+.banner_top {
+    height: 140px;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 2rem 3rem;
-    margin: 3rem 3rem;
-    background-color: #78c463fe;
+    background-color: #92eb4c;
 }
 
-#navigation_top > ul {
+.navigation_top ul {
     display: flex;
     list-style: none;
+    margin-left: 7.5rem;
 }
 
-#navigation_top > ul li {
+.navigation_top ul li {
+    margin: 0 0.5rem;
+    transition: transform 0.2s ease;
+}
+
+.navigation_top ul li:hover {
+    transform: scale(1.08);
+}
+
+.navigation_top ul li a,
+.navigation_top ul li a:visited {
+    text-decoration: none;
+    color: #333;
+}
+
+
+.login-form > input,
+.login-btn,
+.logout-btn {
     margin: 0 0.5rem;
 }
 
-#credentials {
+.login-form > input {
+    height: 25px;
+}
+
+.login-btn,
+.logout-btn {
+    border: none;
+    width: 60px;
+    height: 25px;
+}
+
+.user-authentication {
     display: flex;
+    align-items: flex-end; /* Aligns items to the bottom */
+    justify-content: flex-end; /* Align to the right if you want it next to the navigation */
 }
 
-#credentials > input {
-    margin: 0 0.5rem;
+.login-form {
+    display: flex;
+    align-items: flex-end;
 }
 
-#credentials > button {
-    margin: 0 0.5rem;
+.cards, .profilewrap {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    padding: 1.5rem;
+}
+
+.cards {
+    gap: 1.5rem;
+}
+
+.card {
+    background-color: white;
+    padding: 1rem;
+    max-width: 300px;
+    transition: transform 0.5s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 1rem;
+    width: 900px;
+}
+
+.profilepic > img {
+    display: block;
+    max-width: 200px;
+    margin: 1rem;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #92eb4c;
+    height: 100px;
+}
+
+.palz_img img {
+    max-width: 150px;
+    height: auto;
 }
