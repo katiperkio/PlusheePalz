@@ -1,7 +1,7 @@
 <div class="navigation_top">
     <ul>
         <li class="navbtn">
-            <a href="./landing.php">Home</a>
+            <a href="./index.php">Home</a>
         </li>
         <li class="navbtn">
             <a href="./discover.php">Discover Palz</a>

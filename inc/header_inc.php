@@ -25,7 +25,7 @@ error_reporting(E_ALL);
 
 <body>
     <div class="top_container">
-        <a href="./landing.php">
+        <a href="./index.php">
             <img class="logo" src="./images/PlusheePalzLogo.webp" alt="logo" />
         </a>
         <header class="banner_top">

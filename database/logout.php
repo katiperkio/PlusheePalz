@@ -4,5 +4,5 @@ session_start();
 
 session_destroy();
 
-header("Location: /plusheepalz/landing.php");
+header("Location: /plusheepalz/index.php");
 exit;

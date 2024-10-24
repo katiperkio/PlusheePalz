@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             echo "Success";
-            header("Location: /plusheepalz/landing.php");
+            header("Location: /plusheepalz/index.php");
         } else {
             echo "Error";
         }

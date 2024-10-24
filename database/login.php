@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
             $_SESSION['username'] = $row['username'];
             $_SESSION['id'] = $row['id'];
 
-            header('Location: /plusheepalz/landing.php');
+            header('Location: /plusheepalz/index.php');
             exit;
         } else {
             echo "Invalid password";

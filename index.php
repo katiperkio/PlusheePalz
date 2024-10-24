@@ -3,7 +3,14 @@
 $page_title = 'Home';
 include 'inc/header_inc.php';
 
-$sql = "SELECT id, name, description, age, image_url FROM palz WHERE status='published'";
+$sql = "SELECT palz.id, palz.name, palz.description, palz.age, palz.image_url, 
+               COALESCE(COUNT(user_likes.palz_id), 0) AS like_count
+        FROM palz
+        LEFT JOIN user_likes ON palz.id = user_likes.palz_id
+        WHERE palz.status = 'published'
+        GROUP BY palz.id";
+
+// $sql = "SELECT id, name, description, age, image_url FROM palz WHERE status='published'";
 $result = mysqli_query($connection, $sql);
 
 if (mysqli_num_rows($result) > 0) { // Check if the query has results
@@ -33,9 +40,12 @@ if (mysqli_num_rows($result) > 0) { // Check if the query has results
         }
         echo "<br>";
 
-
         /* echo "Syntymäpäiväni: " . $row['age'] . "<br>"; */
         echo "Syntymäpäiväni: " . date("j.n.Y", strtotime($row['age'])) . "<br>";
+
+        echo '<button class="like-btn" data-palz-id="' . $palz_id . '">Like</button>';
+        echo '<span class="like-count">' . $row['like_count'] . ' Likes</span>';
+
         echo '</div>';
     }
     echo '</div>'; // Closing the cards container
