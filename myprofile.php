@@ -3,6 +3,23 @@
 $page_title = 'My Profile';
 include 'inc/header_inc.php';
 
+$user_id = $_SESSION['id'];
+
+// Query to fetch the username from the database
+$sql = "SELECT username FROM users WHERE id = ?";
+$stmt = $connection->prepare($sql);
+$stmt->bind_param("i", $user_id);  // "i" indicates that the parameter is an integer
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    // Fetch username
+    $row = $result->fetch_assoc();
+    $username = $row['username'];
+}
+
+$stmt->close();
+
 ?>
 
 <div class="profilewrap">
@@ -13,7 +30,7 @@ include 'inc/header_inc.php';
         </div>
         <div class="username">
             <!-- Username here -->
-            <h1>Minttunen</h1>
+            <h1><?php echo htmlspecialchars($username); ?></h1>
         </div>
         <div class="userdesc">
             <!-- User description here -->

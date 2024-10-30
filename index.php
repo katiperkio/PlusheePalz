@@ -3,36 +3,45 @@
 $page_title = 'Home';
 include 'inc/header_inc.php';
 
+$user_id = $_SESSION['id'] ?? null;
+
 $sql = "SELECT palz.id, palz.name, palz.description, palz.age, palz.image_url, 
-               COALESCE(COUNT(user_likes.palz_id), 0) AS like_count
+               COALESCE(COUNT(user_likes.palz_id), 0) AS like_count,
+               MAX(user_likes.user_id = ?) AS isLiked
         FROM palz
         LEFT JOIN user_likes ON palz.id = user_likes.palz_id
         WHERE palz.status = 'published'
         GROUP BY palz.id";
 
-// $sql = "SELECT id, name, description, age, image_url FROM palz WHERE status='published'";
-$result = mysqli_query($connection, $sql);
+$stmt = $connection->prepare($sql);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if (mysqli_num_rows($result) > 0) { // Check if the query has results
+if ($result->num_rows > 0) { // Check if the query has results
     echo '<div class="cards">'; // Wrapping all cards inside a container div
-    while ($row = mysqli_fetch_assoc($result)) { // Go through each row in the results
+    while ($row = $result->fetch_assoc()) { // Go through each row in the results
 
         $palz_id = $row['id'] ?? NULL;
         $nature_sql = "SELECT nature.nature
-            FROM palz_nature
-            INNER JOIN palz ON palz_nature.palz_id = palz.id
-            INNER JOIN nature ON palz_nature.nature_id = nature.id
-            WHERE palz.id = $palz_id ORDER BY nature.nature";
+                       FROM palz_nature
+                       INNER JOIN nature ON palz_nature.nature_id = nature.id
+                       WHERE palz_nature.palz_id = ?
+                       ORDER BY nature.nature";
+
+        $nature_stmt = $connection->prepare($nature_sql);
+        $nature_stmt->bind_param("i", $palz_id);
+        $nature_stmt->execute();
+        $result_nature = $nature_stmt->get_result();
 
         echo '<div class="card">'; // Print the values inside a card
         echo "<div class='palz_img'><img src=" . $row['image_url'] . "/></div>";
         echo "<h3>" . $row['name'] . "</h3><br>";
         echo "Millainen olen: ";
         if ($palz_id !== NULL) {
-            $result_nature = mysqli_query($connection, $nature_sql);
-            if (mysqli_num_rows($result_nature) > 0) {
+            if ($result_nature->num_rows > 0) {
                 $natures = []; // Initialize an empty array to store the nature values
-                while ($row_nature = mysqli_fetch_assoc($result_nature)) {
+                while ($row_nature = $result_nature->fetch_assoc()) {
                     $natures[] = $row_nature['nature']; // Collect nature values
                 }
                 echo implode(', ', $natures); // Print nature values as a comma-separated string
@@ -43,18 +52,25 @@ if (mysqli_num_rows($result) > 0) { // Check if the query has results
         /* echo "Syntymäpäiväni: " . $row['age'] . "<br>"; */
         echo "Syntymäpäiväni: " . date("j.n.Y", strtotime($row['age'])) . "<br>";
 
-        echo '<button class="like-btn" data-palz-id="' . $palz_id . '">Like</button>';
+        $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
+        echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
+            . $buttonText . '</button>';
+
         echo '<span class="like-count">' . $row['like_count'] . ' Likes</span>';
 
         echo '</div>';
+
+        $result_nature->free();
+        $nature_stmt->close();
     }
     echo '</div>'; // Closing the cards container
 } else {
     echo "Ei tuloksia.";
 }
 
-mysqli_free_result($result); // Free the results
+$result->free();
+$stmt->close();
 
-mysqli_close($connection); // Close database connection
+mysqli_close($connection);
 
 include 'inc/footer_inc.php';

@@ -1,7 +1,3 @@
-<?php
-session_start();
-?>
-
 <div class="user-authentication">
     <?php if (isset($_SESSION['username'])): ?>
         <!-- display this section if user is logged in -->
