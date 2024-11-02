@@ -62,15 +62,23 @@ main {
     margin: 0 0.5rem;
 }
 
-.login-form > input {
+.login-form > input,
+.addpalz > input {
     height: 25px;
+    width: 200px;
 }
 
 .login-btn,
-.logout-btn {
+.logout-btn,
+.like-btn,
+.add-btn {
     border: none;
     width: 60px;
     height: 25px;
+}
+
+.add-btn {
+    margin-top: 1rem;
 }
 
 .user-authentication {
@@ -84,7 +92,7 @@ main {
     align-items: flex-end;
 }
 
-.cards, .profilewrap {
+.cards, .profilewrap, .addpalz-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -108,7 +116,7 @@ main {
     transform: scale(1.05);
 }
 
-.profile {
+.profile, .addpalz {
     display: flex;
     flex-direction: column;
     background-color: white;

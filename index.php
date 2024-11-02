@@ -5,7 +5,7 @@ include 'inc/header_inc.php';
 
 $user_id = $_SESSION['id'] ?? null;
 
-$sql = "SELECT palz.id, palz.name, palz.description, palz.age, palz.image_url, 
+$sql = "SELECT palz.id, palz.name, palz.age, palz.birthday, palz.image_url, 
                COALESCE(COUNT(user_likes.palz_id), 0) AS like_count,
                MAX(user_likes.user_id = ?) AS isLiked
         FROM palz
@@ -50,7 +50,7 @@ if ($result->num_rows > 0) { // Check if the query has results
         echo "<br>";
 
         /* echo "Syntymäpäiväni: " . $row['age'] . "<br>"; */
-        echo "Syntymäpäiväni: " . date("j.n.Y", strtotime($row['age'])) . "<br>";
+        echo "Syntymäpäiväni: " . date("j.n.Y", strtotime($row['birthday'])) . "<br>";
 
         $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
         echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
