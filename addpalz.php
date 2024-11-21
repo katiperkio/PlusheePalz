@@ -4,13 +4,13 @@ $page_title = 'Add Palz';
 include 'inc/header_inc.php';
 
 // Fetch nature traits
-$sql_nature = "SELECT * FROM nature";
+$sql_nature = "SELECT * FROM nature ORDER BY nature ASC;";
 $stmt_nature = $connection->prepare($sql_nature);
 $stmt_nature->execute();
 $result_nature = $stmt_nature->get_result();
 
 // Fetch preferences
-$sql_preferences = "SELECT * FROM preferences";
+$sql_preferences = "SELECT * FROM preferences ORDER BY name ASC;";
 $stmt_preferences = $connection->prepare($sql_preferences);
 $stmt_preferences->execute();
 $result_preferences = $stmt_preferences->get_result();
@@ -31,7 +31,7 @@ $result_preferences = $stmt_preferences->get_result();
                 <?php
                 if ($result_nature->num_rows > 0) {
                     while ($row_nature = $result_nature->fetch_assoc()) {
-                        echo "<option value='" . htmlspecialchars($row_nature['nature']) . "'>" . htmlspecialchars($row_nature['nature']) . "</option>";
+                        echo "<option value='" . $row_nature['id'] . "'>" . htmlspecialchars($row_nature['nature']) . "</option>";
                     }
                 }
                 ?>
@@ -45,7 +45,7 @@ $result_preferences = $stmt_preferences->get_result();
                 <?php
                 if ($result_preferences->num_rows > 0) {
                     while ($row_preferences = $result_preferences->fetch_assoc()) {
-                        echo "<option value='" . htmlspecialchars($row_preferences['name']) . "'>" . htmlspecialchars($row_preferences['name']) . "</option>";
+                        echo "<option value='" . $row_preferences['id'] . "'>" . htmlspecialchars($row_preferences['name']) . "</option>";
                     }
                 }
                 ?>
@@ -59,7 +59,7 @@ $result_preferences = $stmt_preferences->get_result();
                 $result_preferences->data_seek(0);
                 if ($result_preferences->num_rows > 0) {
                     while ($row_preferences = $result_preferences->fetch_assoc()) {
-                        echo "<option value='" . htmlspecialchars($row_preferences['name']) . "'>" . htmlspecialchars($row_preferences['name']) . "</option>";
+                        echo "<option value='" . $row_preferences['id'] . "'>" . htmlspecialchars($row_preferences['name']) . "</option>";
                     }
                 }
                 ?>

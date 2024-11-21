@@ -2,6 +2,9 @@
 include '../database/connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // var_dump($_POST);
+    // die();
+
     // Get data from the form
     $palz_name = $_POST['palz_name'];
     $palz_age = $_POST['palz_age'];
@@ -13,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connection->begin_transaction();
 
     try {
-        // Step 1: Insert into palz table
+        // Insert into palz table
         $sql = "INSERT INTO palz (name, age) VALUES (?, ?)";
         $stmt = $connection->prepare($sql);
         $stmt->bind_param("ss", $palz_name, $palz_age);
@@ -22,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Get the inserted palz_id
         $palz_id = $stmt->insert_id;
 
-        // Step 2: Insert traits into palz_nature table
+        // Insert traits into palz_nature table
         $sql_nature = "INSERT INTO palz_nature (palz_id, nature_id) VALUES (?, ?)";
         $stmt_nature = $connection->prepare($sql_nature);
         foreach ($palz_nature as $nature_id) {
@@ -30,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_nature->execute();
         }
 
-        // Step 3: Insert likes and dislikes into palz_preferences table
+        // Insert likes and dislikes into palz_preferences table
         $sql_preferences = "INSERT INTO palz_preferences (palz_id, preference_id, type) VALUES (?, ?, ?)";
         $stmt_preferences = $connection->prepare($sql_preferences);
 

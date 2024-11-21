@@ -37,7 +37,7 @@ if ($result->num_rows > 0) { // Check if the query has results
         echo '<div class="card">'; // Print the values inside a card
         echo "<div class='palz_img'><img src=" . $row['image_url'] . "/></div>";
         echo "<h3>" . $row['name'] . "</h3><br>";
-        echo "Millainen olen: ";
+        echo "I am ";
         if ($palz_id !== NULL) {
             if ($result_nature->num_rows > 0) {
                 $natures = []; // Initialize an empty array to store the nature values
@@ -50,7 +50,7 @@ if ($result->num_rows > 0) { // Check if the query has results
         echo "<br>";
 
         /* echo "Syntymäpäiväni: " . $row['age'] . "<br>"; */
-        echo "Syntymäpäiväni: " . date("j.n.Y", strtotime($row['birthday'])) . "<br>";
+        echo "My birthday is " . date("j.n.Y", strtotime($row['birthday'])) . "<br>";
 
         $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
         echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
