@@ -49,8 +49,31 @@ if ($result->num_rows > 0) { // Check if the query has results
         }
         echo "<br>";
 
-        /* echo "Syntymäpäiväni: " . $row['age'] . "<br>"; */
-        echo "My birthday is " . date("j.n.Y", strtotime($row['birthday'])) . "<br>";
+        // Assume $row contains data from the database
+        $birthday = $row['birthday'];
+        $staticAge = $row['age']; // Static age field in the database (optional)
+
+        // Check if the birthday is provided
+        if (!empty($birthday)) {
+            // Convert the birthday to a DateTime object
+            $birthdayDateTime = new DateTime($birthday);
+
+            // Get the current date
+            $today = new DateTime();
+
+            // Calculate the age
+            $age = $today->diff($birthdayDateTime)->y;
+
+            // Display the results
+            echo "My birthday is " . $birthdayDateTime->format("d.m.Y") . "<br>";
+            echo "Age: $age<br>";
+        } elseif (!empty($staticAge)) {
+            // If no birthday, use the static age
+            echo "Age: $staticAge<br>";
+        } else {
+            // No birthday or static age set
+            echo "Age information not available.<br>";
+        }
 
         $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
         echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
@@ -73,4 +96,8 @@ $stmt->close();
 
 mysqli_close($connection);
 
-include 'inc/footer_inc.php';
+?>
+
+        <?php
+        include 'inc/footer_inc.php';
+        ?>

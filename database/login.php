@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
     $user = $_POST['username'];
     $password = $_POST['password']; // fetch the inputs from login form
 
-    $stmt = $connection->prepare("SELECT id, username, password FROM users WHERE username = ?");
+    $stmt = $connection->prepare("SELECT id, username, password, role, email FROM users WHERE username = ?");
     $stmt->bind_param("s", $user);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -20,6 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
         if (password_verify($password, $hashed_password)) {
             $_SESSION['username'] = $row['username'];
             $_SESSION['id'] = $row['id'];
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['email'] = $row['email'];
 
             header('Location: /plusheepalz/index.php');
             exit;

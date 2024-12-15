@@ -5,6 +5,7 @@ include('connect.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username']; // get username from form
     $password = $_POST['password']; // get password from form
+    $email = $_POST['email'];
 
     $stmt = $connection->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
@@ -19,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
         // insert new user into database
-        $stmt = $connection->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $stmt->bind_param("ss", $username, $hashed_password);
+        $stmt = $connection->prepare("INSERT INTO users (username, password, email) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $hashed_password, $email);
 
         if ($stmt->execute()) {
             echo "Success";

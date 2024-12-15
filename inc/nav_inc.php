@@ -23,5 +23,12 @@
                 <a href="./createaccount.php">Join Now</a>
             </li>
         <?php endif; ?>
+        <?php if (isset($_SESSION['role'])): ?>
+            <?php if ($_SESSION['role'] === 'admin'): ?>
+                <li class="navbtn">
+                    <a href="./admin/index.php">Admin</a>
+                </li>
+            <?php endif; ?>
+        <?php endif; ?>
     </ul>
 </div>

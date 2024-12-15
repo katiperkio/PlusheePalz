@@ -3,6 +3,10 @@
 $page_title = 'My Profile';
 include 'inc/header_inc.php';
 
+if (!isset($_SESSION['id'])) {
+    die();
+}
+
 $user_id = $_SESSION['id'];
 
 // Query to fetch the username from the database

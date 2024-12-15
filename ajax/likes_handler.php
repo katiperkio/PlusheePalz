@@ -24,6 +24,12 @@ if ($result->num_rows > 0) {
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("ii", $user_id, $palz_id);
     $stmt->execute();
+
+    // Decrease the like count in the palz table
+    $sql = "UPDATE palz SET likes_count = likes_count - 1 WHERE id = ?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $palz_id);
+    $stmt->execute();
     echo "like_removed";
 } else {
     // If the user hasn't liked the palz, add the like
@@ -31,6 +37,13 @@ if ($result->num_rows > 0) {
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("ii", $user_id, $palz_id);
     $stmt->execute();
+
+    // Increase the like count in the palz table
+    $sql = "UPDATE palz SET likes_count = likes_count + 1 WHERE id = ?";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("i", $palz_id);
+    $stmt->execute();
+
     echo "like_added";
 }
 

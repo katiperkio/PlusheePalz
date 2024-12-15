@@ -1,13 +1,17 @@
 <?php
-include '../database/connect.php';
+include 'connect.php';
+
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // var_dump($_POST);
-    // die();
+    /* var_dump($_POST);
+    exit(); */
 
     // Get data from the form
     $palz_name = $_POST['palz_name'];
-    $palz_age = $_POST['palz_age'];
+    $palz_age = !empty($_POST['palz_age']) ? $_POST['palz_age'] : null;
+    $palz_birthday = !empty($_POST['palz_birthday']) ? $_POST['palz_birthday'] : null;
+    $created_by = $_SESSION['id'];
     $palz_nature = $_POST['palz_nature'] ?? []; // Traits
     $palz_loves = $_POST['palz_loves'] ?? [];   // Likes
     $palz_hates = $_POST['palz_hates'] ?? [];   // Dislikes
@@ -17,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Insert into palz table
-        $sql = "INSERT INTO palz (name, age) VALUES (?, ?)";
+        $sql = "INSERT INTO palz (name, age, birthday, created_by) VALUES (?, ?, ?, ?)";
         $stmt = $connection->prepare($sql);
-        $stmt->bind_param("ss", $palz_name, $palz_age);
+        $stmt->bind_param("sssi", $palz_name, $palz_age, $palz_birthday, $created_by);
         $stmt->execute();
 
         // Get the inserted palz_id
@@ -56,6 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         echo "Palz added successfully!";
         header("Location: /plusheepalz/index.php");
+        exit();
     } catch (Exception $e) {
         // Rollback transaction on failure
         $connection->rollback();

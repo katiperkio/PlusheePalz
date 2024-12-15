@@ -3,6 +3,10 @@
 $page_title = 'Add Palz';
 include 'inc/header_inc.php';
 
+if (!isset($_SESSION['id'])) {
+    die();
+}
+
 // Fetch nature traits
 $sql_nature = "SELECT * FROM nature ORDER BY nature ASC;";
 $stmt_nature = $connection->prepare($sql_nature);
@@ -23,10 +27,12 @@ $result_preferences = $stmt_preferences->get_result();
         <input type="text" id="palz_name" name="palz_name" required>
         <label for="palz_age">Pal's age</label>
         <input type="text" id="palz_age" name="palz_age">
+        <label for="palz_age">Pal's birthday (optional)</label>
+        <input type="date" id="palz_birthday" name="palz_birthday">
         <br>
 
         <div class="select_nature">
-            <label for="palz_nature">What traits does your pal have?</label>
+            <label for="palz_nature">What is your pal like?</label>
             <select id="palz_nature" name="palz_nature[]" multiple="multiple" placeholder="Choose traits">
                 <?php
                 if ($result_nature->num_rows > 0) {
@@ -40,8 +46,8 @@ $result_preferences = $stmt_preferences->get_result();
         </div>
 
         <div class="select_preferences">
-            <label for="palz_loves">What does your pal like?</label>
-            <select id="palz_loves" name="palz_loves[]" multiple="multiple" placeholder="Choose likes">
+            <label for="palz_loves">What things does your pal like?</label>
+            <select id="palz_loves" name="palz_loves[]" multiple="multiple" placeholder="Choose favorites">
                 <?php
                 if ($result_preferences->num_rows > 0) {
                     while ($row_preferences = $result_preferences->fetch_assoc()) {
@@ -52,7 +58,7 @@ $result_preferences = $stmt_preferences->get_result();
             </select>
             <br>
 
-            <label for="palz_hates">What does your pal dislike?</label>
+            <label for="palz_hates">What things does your pal dislike?</label>
             <select id="palz_hates" name="palz_hates[]" multiple="multiple" placeholder="Choose dislikes">
                 <?php
                 // Reset pointer and reuse the preferences for dislikes
