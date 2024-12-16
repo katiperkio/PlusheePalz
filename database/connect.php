@@ -1,8 +1,8 @@
 <?php
 
-require dirname(DIR) . "/vendor/autoload.php";
+require dirname(__DIR__) . "/vendor/autoload.php";
 
-$dotenv = Dotenv\Dotenv::createImmutable(DIR . '/..');
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/..');
 $dotenv->safeLoad();
 $environment = $_ENV['ENVIRONMENT'];
 
