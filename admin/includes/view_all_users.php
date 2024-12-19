@@ -62,7 +62,7 @@
                                     <span><?= substr($row['username'], 0, 3); ?></span>
                                 </div>
                                 <div class="user-name">
-                                    <span class="tb-lead"><?= $row['username']; ?></span>
+                                    <span class="tb-lead"><?= htmlspecialchars($row['username'], ENT_QUOTES, 'UTF-8'); ?></span>
                                 </div>
                             </div>
                         </div>
