@@ -75,20 +75,23 @@ if ($result->num_rows > 0) { // Check if the query has results
             echo "Age information not available.<br>";
         }
 
+        echo '<div class="palz_likes">';
+
         $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
         echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
             . $buttonText . '</button>';
 
         echo '<span class="like-count">' . $row['like_count'] . ' Likes</span>';
 
-        echo '</div>';
+        echo '</div>'; //closing likes
+        echo '</div>'; //closing a card
 
         $result_nature->free();
         $nature_stmt->close();
     }
     echo '</div>'; // Closing the cards container
 } else {
-    echo "Ei tuloksia.";
+    echo "No results.";
 }
 
 $result->free();

@@ -1,8 +1,10 @@
 <?php
 
+include('connect.php');
+
 session_start();
 
 session_destroy();
 
-header("Location: /plusheepalz/index.php");
+header("Location:" . BASE_URL . "/index.php");
 exit;

@@ -1,7 +1,13 @@
 <?php
 
+session_start();
 include '../database/connect.php';
-require_once('../database/connect.php');
+
+// Ensure the user is logged in
+if (!isset($_SESSION['id'])) {
+    echo "Not logged in";
+    exit();
+}
 
 $palz_id = $_POST['palz_id'] ?? null;
 $user_id = $_POST['user_id'] ?? null;

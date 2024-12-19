@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
             $_SESSION['role'] = $row['role'];
             $_SESSION['email'] = $row['email'];
 
-            header('Location: /plusheepalz/index.php');
+            header('Location:' . BASE_URL . '/index.php');
             exit;
         } else {
             echo "Invalid password";

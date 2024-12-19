@@ -80,7 +80,7 @@
                                 <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
                                     <ul class="link-list-plain">
-                                        <li><a href="palzprofile.php?id=<?= $row['palz_id']; ?>">View Palz</a></li>
+                                        <li><a href="<?= BASE_URL ?>/admin/palzprofile.php?id=<?= $row['palz_id']; ?>">View Palz</a></li>
                                         <li><a href="#">Edit Palz</a></li>
                                         <li><a href="#" class="delete-btn" data-id="<?= $row['palz_id']; ?>" data-table="palz" style="color: red;">Delete</a></li>
                                     </ul>

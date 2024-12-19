@@ -6,7 +6,7 @@
                 <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="html/index.html" class="logo-link">
+                <a href="<?= BASE_URL ?>/index.php" class="logo-link">
                     <img class="logo-light logo-img" src="../images/PlusheePalzLogo.webp" alt="logo">
                     <img class="logo-dark logo-img" src="../images/PlusheePalzLogo.webp" alt="logo-dark">
                 </a>
@@ -48,7 +48,7 @@
                             <div class="dropdown-inner">
                                 <ul class="link-list">
                                     <li>
-                                        <a href="/plusheepalz/database/logout.php">
+                                        <a href="<?= BASE_URL ?>/database/logout.php">
                                             <em class="icon ni ni-signout"></em>
                                             <span>Log Out</span>
                                         </a>

@@ -7,13 +7,13 @@ session_start();
 
 // Check if user is logged in
 if (!isset($_SESSION['id'])) {
-    header("Location: ../index.php");
+    header("Location:" . BASE_URL . "/index.php");
     exit();
 }
 
 // Check if user has the "admin" role
 if ($_SESSION['role'] !== 'admin') {
-    header("Location: ../index.php");
+    header("Location:" . BASE_URL . "/index.php");
     exit();
 }
 
@@ -23,6 +23,7 @@ header("X-Content-Type-Options: nosniff"); // Prevent MIME sniffing
 /* header("Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;"); // Restrict content sources */
 header("Referrer-Policy: no-referrer"); // Control referrer information
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

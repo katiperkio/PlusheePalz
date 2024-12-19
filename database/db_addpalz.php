@@ -59,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $connection->commit();
 
         echo "Palz added successfully!";
-        header("Location: /plusheepalz/index.php");
+        header("Location:" . BASE_URL . "/index.php");
         exit();
     } catch (Exception $e) {
         // Rollback transaction on failure

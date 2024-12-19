@@ -37,8 +37,8 @@ $stmt_user->close();
                             <h3 class="nk-block-title page-title">User Details</h3>
                         </div>
                         <div class="nk-block-head-content">
-                            <a href="./users.php" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
-                            <a href="./users.php" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
+                            <a href="<?= BASE_URL ?>/admin/users.php" class="btn btn-outline-light bg-white d-none d-sm-inline-flex"><em class="icon ni ni-arrow-left"></em><span>Back</span></a>
+                            <a href="<?= BASE_URL ?>admin/users.php" class="btn btn-icon btn-outline-light bg-white d-inline-flex d-sm-none"><em class="icon ni ni-arrow-left"></em></a>
                         </div>
                     </div>
                 </div><!-- .nk-block-head -->
