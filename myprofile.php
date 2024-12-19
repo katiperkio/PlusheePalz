@@ -38,7 +38,6 @@ $stmt->close();
         </div>
         <div class="userdesc">
             <!-- User description here -->
-            Olen pieni vihreä triceratops
         </div>
         <div class="friendlist">
             <!-- Friendlist here -->
