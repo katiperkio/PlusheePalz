@@ -36,13 +36,13 @@ if ($result->num_rows > 0) { // Check if the query has results
 
         echo '<div class="card">'; // Print the values inside a card
         echo "<div class='palz_img'><img src=" . $row['image_url'] . "/></div>";
-        echo "<h3>" . $row['name'] . "</h3><br>";
+        echo "<h3>" . htmlspecialchars($row['name']) . "</h3><br>";
         echo "I am ";
         if ($palz_id !== NULL) {
             if ($result_nature->num_rows > 0) {
                 $natures = []; // Initialize an empty array to store the nature values
                 while ($row_nature = $result_nature->fetch_assoc()) {
-                    $natures[] = $row_nature['nature']; // Collect nature values
+                    $natures[] = htmlspecialchars($row_nature['nature']); // Collect nature values
                 }
                 echo implode(', ', $natures); // Print nature values as a comma-separated string
             }
@@ -91,7 +91,7 @@ if ($result->num_rows > 0) { // Check if the query has results
     }
     echo '</div>'; // Closing the cards container
 } else {
-    echo "No results.";
+    echo "No palz yet.";
 }
 
 $result->free();
