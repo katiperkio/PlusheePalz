@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+session_start(); // Start the session at the very top of the file
+
+include "./database/connect.php";
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -18,12 +22,7 @@ error_reporting(E_ALL);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="./js/jquery.sumoselect.js"></script>
-    <?php
-    ?>
 </head>
-<?php include "./database/connect.php";
-
-session_start(); ?>
 
 <body>
     <div class="top_container">
