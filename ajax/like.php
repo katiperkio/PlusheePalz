@@ -1,9 +1,3 @@
-<?php
-
-session_start();
-
-?>
-
 <script>
     $(document).ready(function() {
         $('.like-btn').on('click', function() {
