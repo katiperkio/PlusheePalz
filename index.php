@@ -35,7 +35,7 @@ if ($result->num_rows > 0) { // Check if the query has results
         $result_nature = $nature_stmt->get_result();
 
         echo '<div class="card">'; // Print the values inside a card
-        echo "<div class='palz_img'><img src=" . $row['image_url'] . "/></div>";
+        echo '<div class="palz_img"><img src="' . $row["image_url"] . '"/></div>';
         echo "<h3>" . htmlspecialchars($row['name']) . "</h3><br>";
         echo "I am ";
         if ($palz_id !== NULL) {

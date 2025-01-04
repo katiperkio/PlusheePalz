@@ -22,7 +22,7 @@ $result_preferences = $stmt_preferences->get_result();
 ?>
 
 <div class="addpalz-wrap">
-    <form action="./database/db_addpalz.php" method="POST" class="addpalz">
+    <form action="./database/db_addpalz.php" method="POST" class="addpalz dropzone" enctype="multipart/form-data" id="submit_palz">
         <label for="palz_name">Pal's name</label>
         <input type="text" id="palz_name" name="palz_name" required>
         <label for="palz_age">Pal's age</label>
@@ -72,9 +72,55 @@ $result_preferences = $stmt_preferences->get_result();
             </select>
             <br>
         </div>
+        <div>
+            <input type="file" name="file" id="dropzone" />
+        </div>
         <button type="submit" class="add-btn">Add Palz</button>
     </form>
 </div>
+
+<script>
+    Dropzone.autoDiscover = false;
+
+    var myDropzone = newDropzone("#submit_palz", {
+        url: "./database/db_addpalz.php",
+        paramName: "file",
+        maxFilesize: 10,
+        acceptedFiles: "image/*",
+        autoProcessQueue: false,
+        maxFiles: 1,
+        addRemoveLinks: true,
+        init: function() {
+            var dropzone = this;
+
+            $("#submit_palz button").click(function(e) {
+                e.preventDefault();
+
+                if (dropzone.getQueuedFiles().length > 0) {
+                    dropzone.processQueue();
+                } else {
+                    alert("Please select an image before submitting.");
+                }
+            });
+
+            dropzone.on("success", function(file, response) {
+                alert("Image uploaded sucessfully!");
+
+                let formData = $("submit_palz").serialize();
+                $.post("./database/db_addpalz.php", formData, function(data) {
+                    alert("Pal successfully added!");
+                    location.reload();
+                }).fail(function() {
+                    alert("Error submitting form data!");
+                });
+            });
+
+            dropzone.on("error", function(file, message) {
+                alert("Error uploading image: " + message);
+            });
+        }
+    });
+</script>
 
 <?php
 
