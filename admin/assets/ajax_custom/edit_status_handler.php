@@ -20,11 +20,6 @@ if (!$palzId || !$newStatus || !in_array($newStatus, ['published', 'draft'])) {
     exit();
 }
 
-if (!$table || !$id || !is_numeric($id)) {
-    echo "Invalid input";
-    exit();
-}
-
 try {
     // Prepare the update query
     $sql = "UPDATE palz SET status = ? WHERE id = ?";

@@ -12,7 +12,7 @@
             // Validate the new status
             if (newStatus && (newStatus === 'published' || newStatus === 'draft')) {
                 $.ajax({
-                    url: './assets/ajax_custom/edit_status_handler.php', // Path to your backend handler
+                    url: './assets/ajax_custom/edit_status_handler.php', // Path to backend handler
                     type: 'POST',
                     data: {
                         id: palzId,
@@ -20,11 +20,12 @@
                     },
                     success: function(response) {
                         response = response.trim();
+                        console.log("response: ", response);
                         if (response === 'success') {
                             alert("Status updated successfully.");
                             location.reload(); // Reload to reflect the changes
                         } else {
-                            alert("Failed to update status. Please try again.");
+                            alert("Failed to update status. Please try again.", response);
                         }
                     },
                     error: function(xhr, status, error) {
