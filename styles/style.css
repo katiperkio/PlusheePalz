@@ -4,6 +4,10 @@
     margin: 0;
 }
 
+p {
+    margin: 0 !important;
+}
+
 body {
     background: radial-gradient(circle, #92eb4c 40%, transparent 41%),radial-gradient(circle at bottom left, #92eb4c 20%, transparent 21%),radial-gradient(circle at bottom right, #92eb4c 20%, transparent 21%),radial-gradient(circle at top left, #92eb4c 20%, transparent 21%),radial-gradient(circle at top right, #92eb4c 20%, transparent 21%);
     background-size: 6em 6em;
@@ -68,10 +72,7 @@ main {
     width: 200px;
 }
 
-.login-btn,
-.logout-btn,
-.like-btn,
-.add-btn {
+.like-btn {
     border: none;
     width: 60px;
     height: 25px;
@@ -83,8 +84,8 @@ main {
 
 .user-authentication {
     display: flex;
-    align-items: flex-end; /* Aligns items to the bottom */
-    justify-content: flex-end; /* Align to the right if you want it next to the navigation */
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .login-form {
@@ -108,16 +109,24 @@ main {
 .card {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    min-height: 460px;
     align-items: center;
     background-color: white;
     padding: 1rem;
-    width: 250px;
-    height: 350px;
+    width: 280px;
     transition: transform 0.5s ease;
 }
 
+.card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    height: 100%;
+}
+
 .card:hover {
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 .profile, .addpalz {
@@ -126,6 +135,16 @@ main {
     background-color: white;
     padding: 1rem;
     width: 900px;
+    border: none;
+}
+
+.form-wrap {
+    display:flex;
+    flex-direction: column;
+}
+
+.SumoSelect > .CaptionCont > span.placeholder {
+    color:white !important;
 }
 
 .profilepic > img {
@@ -143,13 +162,19 @@ footer {
 }
 
 .palz_img img {
-    width: 150px;
-    
+    display: block;
+    width: 200px;
+    max-width: 200px;
+    height: 200px;
+    max-height: 200px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .palz_likes {
-    
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 8px;
+    margin-top: auto;
 }

@@ -18,9 +18,9 @@ $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-if ($result->num_rows > 0) { // Check if the query has results
-    echo '<div class="cards">'; // Wrapping all cards inside a container div
-    while ($row = $result->fetch_assoc()) { // Go through each row in the results
+if ($result->num_rows > 0) {
+    echo '<div class="cards">';
+    while ($row = $result->fetch_assoc()) {
 
         $palz_id = $row['id'] ?? NULL;
         $nature_sql = "SELECT nature.nature
@@ -33,74 +33,78 @@ if ($result->num_rows > 0) { // Check if the query has results
         $nature_stmt->bind_param("i", $palz_id);
         $nature_stmt->execute();
         $result_nature = $nature_stmt->get_result();
+?>
 
-        echo '<div class="card">'; // Print the values inside a card
-        echo '<div class="palz_img"><img src="' . $row["image_url"] . '"/></div>';
-        echo "<h3>" . htmlspecialchars($row['name']) . "</h3><br>";
-        echo "I am ";
-        if ($palz_id !== NULL) {
-            if ($result_nature->num_rows > 0) {
-                $natures = []; // Initialize an empty array to store the nature values
-                while ($row_nature = $result_nature->fetch_assoc()) {
-                    $natures[] = htmlspecialchars($row_nature['nature']); // Collect nature values
-                }
-                echo implode(', ', $natures); // Print nature values as a comma-separated string
-            }
-        }
-        echo "<br>";
+        <div class="card">
+            <div class="palz_img"><img src="<?= $row["image_url"]; ?>" /></div>
+            <h3 class="my-1"><?= htmlspecialchars($row['name']); ?></h3>
+            <div class="card-body">
+                <div>
+                    <p>I am
+                        <?php if ($palz_id !== NULL) {
+                            if ($result_nature->num_rows > 0) {
+                                $natures = [];
+                                while ($row_nature = $result_nature->fetch_assoc()) {
+                                    $natures[] = htmlspecialchars($row_nature['nature']);
+                                }
+                                echo implode(', ', $natures);
+                            }
+                        }
+                        ?>
+                    </p>
+                </div>
 
-        // Assume $row contains data from the database
-        $birthday = $row['birthday'];
-        $staticAge = $row['age']; // Static age field in the database (optional)
+                <?php
+                $birthday = $row['birthday'];
+                $staticAge = $row['age'];
 
-        // Check if the birthday is provided
-        if (!empty($birthday)) {
-            // Convert the birthday to a DateTime object
-            $birthdayDateTime = new DateTime($birthday);
+                // Check if the birthday is provided
+                if (!empty($birthday)) {
+                    $birthdayDateTime = new DateTime($birthday);
+                    $today = new DateTime();
+                    $age = $today->diff($birthdayDateTime)->y;
+                ?>
+                    <div>
+                        <p>My birthday is <?= $birthdayDateTime->format("d.m.Y") ?></p>
+                    </div>
+                    <div>
+                        <p>Age: <?= $age; ?></p>
+                    </div>
+                <?php } elseif (!empty($staticAge)) {
+                    // If no birthday, use the static age 
+                ?>
+                    <div>
+                        <p>Age: <?= $staticAge; ?></p>
+                    </div>
+                <?php } ?>
 
-            // Get the current date
-            $today = new DateTime();
+                <div class="palz_likes">
 
-            // Calculate the age
-            $age = $today->diff($birthdayDateTime)->y;
+                    <?php $buttonText = $row['isLiked'] ? 'Unlike' : 'Like'; ?>
+                    <button class="like-btn" data-palz-id="<?= $palz_id; ?>">
+                        <?= $buttonText; ?></button>
 
-            // Display the results
-            echo "My birthday is " . $birthdayDateTime->format("d.m.Y") . "<br>";
-            echo "Age: $age<br>";
-        } elseif (!empty($staticAge)) {
-            // If no birthday, use the static age
-            echo "Age: $staticAge<br>";
-        } else {
-            // No birthday or static age set
-            echo "Age information not available.<br>";
-        }
+                    <span class="like-count"><?= $row['like_count']; ?> Likes</span>
 
-        echo '<div class="palz_likes">';
+                </div> <!-- .palz_likes -->
+            </div> <!-- .card-body -->
+        </div> <!-- .card -->
 
-        $buttonText = $row['isLiked'] ? 'Unlike' : 'Like';
-        echo '<button class="like-btn" data-palz-id="' . $palz_id . '">'
-            . $buttonText . '</button>';
-
-        echo '<span class="like-count">' . $row['like_count'] . ' Likes</span>';
-
-        echo '</div>'; //closing likes
-        echo '</div>'; //closing a card
-
+    <?php
         $result_nature->free();
         $nature_stmt->close();
-    }
-    echo '</div>'; // Closing the cards container
-} else {
-    echo "No palz yet.";
-}
+    } ?>
+    </div> <!-- Closing the cards container -->
+<?php } else { ?>
+    <div>
+        <p>No palz yet.</p>
+    </div>
+<?php }
 
 $result->free();
 $stmt->close();
 
 mysqli_close($connection);
 
+include 'inc/footer_inc.php';
 ?>
-
-        <?php
-        include 'inc/footer_inc.php';
-        ?>
