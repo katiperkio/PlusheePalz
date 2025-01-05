@@ -73,9 +73,12 @@ main {
 }
 
 .like-btn {
-    border: none;
-    width: 60px;
-    height: 25px;
+    font-size: 30px;
+    color: #ff167c;
+}
+
+.like-btn > * {
+    cursor: pointer;
 }
 
 .add-btn {
@@ -93,7 +96,7 @@ main {
     align-items: flex-end;
 }
 
-.cards, .profilewrap, .addpalz-wrap {
+.cards, .profilewrap, .addpalz-wrap, .register-wrap {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -129,7 +132,7 @@ main {
     transform: scale(1.02);
 }
 
-.profile, .addpalz {
+.profile, .addpalz, .register-form {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -177,4 +180,23 @@ footer {
     align-items: center;
     gap: 8px;
     margin-top: auto;
+}
+
+.section-wrapper {
+    padding: 40px;
+    height: 300px;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0, 0, 0, 0.5)), url("../images/banner.webp");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 0% 62%;
+}
+
+.section-wrapper > * {
+    color: white;
+}
+
+.hero-img > img {
+    width: 64px;
+    height: 64px;
+    filter: contrast(90%);
 }

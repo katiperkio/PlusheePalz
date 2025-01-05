@@ -19,11 +19,13 @@
 
                     if (response === 'like_added') {
                         // Update the button text and like count when a like is added
-                        $likeBtn.text('Unlike');
+                        // $likeBtn.text('Unlike');
+                        $likeBtn.children().attr("name", "heart");
                         $likeCount.text(parseInt($likeCount.text()) + 1 + " Likes");
                     } else if (response === 'like_removed') {
                         // Update the button text and like count when a like is removed
-                        $likeBtn.text('Like');
+                        // $likeBtn.text('Like');
+                        $likeBtn.children().attr("name", "heart-outline");
                         $likeCount.text(parseInt($likeCount.text()) - 1 + " Likes");
                     }
                 },
