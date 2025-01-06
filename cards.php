@@ -10,7 +10,8 @@ if (stripos($_SERVER['REQUEST_URI'], 'friends')) {
             FROM palz
             INNER JOIN user_likes ON palz.id = user_likes.palz_id
             WHERE palz.status = 'published' AND user_likes.user_id = ?
-            GROUP BY palz.id";
+            GROUP BY palz.id
+            ORDER BY palz.id DESC";
 } else {
     // Query for all Palz
     $sql = "SELECT palz.id, palz.name, palz.age, palz.birthday, palz.image_url, 
@@ -19,7 +20,8 @@ if (stripos($_SERVER['REQUEST_URI'], 'friends')) {
             FROM palz
             LEFT JOIN user_likes ON palz.id = user_likes.palz_id
             WHERE palz.status = 'published'
-            GROUP BY palz.id";
+            GROUP BY palz.id
+            ORDER BY palz.id DESC";
 }
 
 $stmt = $connection->prepare($sql);

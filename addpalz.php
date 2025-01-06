@@ -104,22 +104,6 @@ $result_preferences = $stmt_preferences->get_result();
                     alert("Please select an image before submitting.");
                 }
             });
-
-            dropzone.on("success", function(file, response) {
-                alert("Image uploaded sucessfully!");
-
-                let formData = $("submit_palz").serialize();
-                $.post("./database/db_addpalz.php", formData, function(data) {
-                    alert("Pal successfully added!");
-                    location.reload();
-                }).fail(function() {
-                    alert("Error submitting form data!");
-                });
-            });
-
-            dropzone.on("error", function(file, message) {
-                alert("Error uploading image: " + message);
-            });
         }
     });
 </script>

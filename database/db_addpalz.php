@@ -101,10 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $connection->commit();
 
             echo "Palz added successfully!";
+            $_SESSION['add_palz'] = "success";
             header("Location:" . BASE_URL . "/index.php");
-            exit();
-
-            // echo json_encode(["success"]);
         } catch (Exception $e) {
             // Rollback transaction on failure
             $connection->rollback();
