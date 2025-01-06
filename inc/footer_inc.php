@@ -6,6 +6,8 @@
             document.write(new Date().getFullYear());
         </script>
         Plushee Palz
+        <br>
+        Icons created by <a href="https://www.flaticon.com/free-icons/lullaby" title="lullaby icons">Freepik - Flaticon</a>
     </p>
 </footer>
 <?php include "./ajax/like.php"; ?>
