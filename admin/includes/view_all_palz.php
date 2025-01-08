@@ -62,7 +62,7 @@
 
                         <div class="nk-tb-col tb-col-sm">
                             <div class="user-card">
-                                <div class="user-avatar user-avatar-sm bg-purple" style="background: url('<?= $row['image_url']; ?>') !important; background-position: center; background-repeat: no-repeat !important; background-size: cover !important;">
+                                <div class="user-avatar user-avatar-sm bg-purple" style="background: url('<?= $row['image_url']; ?>') !important; background-position: center 60%; background-repeat: no-repeat !important; background-size: cover !important;">
                                     <!-- <span><img src="<?= $row['image_url']; ?>"> </span> -->
                                 </div>
                                 <div class="user-name">
