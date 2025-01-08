@@ -3,7 +3,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// Start session and ensure admin privileges
+// Ensure admin privileges
 session_start();
 if (!isset($_SESSION['id']) || $_SESSION['role'] !== 'admin') {
     echo "Unauthorized access.";
@@ -14,14 +14,12 @@ include '../../../database/connect.php';
 $palzId = $_POST['id'] ?? null;
 $newStatus = $_POST['status'] ?? null;
 
-// Validate input
 if (!$palzId || !$newStatus || !in_array($newStatus, ['published', 'draft'])) {
     echo 'error';
     exit();
 }
 
 try {
-    // Prepare the update query
     $sql = "UPDATE palz SET status = ? WHERE id = ?";
     $stmt = $connection->prepare($sql);
 

@@ -3,16 +3,14 @@
         $(document).on('click', '.edit-role-btn', function(e) {
             e.preventDefault();
 
-            var userId = $(this).data('id'); // Get the user ID
-            var currentRole = $(this).data('role'); // Get the current role
+            var userId = $(this).data('id');
+            var currentRole = $(this).data('role');
 
-            // Ask for the new role
             var newRole = prompt("Enter new role (admin/guest):", currentRole);
 
-            // Validate the new role
             if (newRole && (newRole === 'admin' || newRole === 'guest')) {
                 $.ajax({
-                    url: './assets/ajax_custom/edit_role_handler.php', // Path to your backend handler
+                    url: './assets/ajax_custom/edit_role_handler.php',
                     type: 'POST',
                     data: {
                         id: userId,
@@ -22,7 +20,7 @@
                         response = response.trim();
                         if (response === 'success') {
                             alert("Role updated successfully.");
-                            location.reload(); // Reload to reflect the changes
+                            location.reload();
                         } else {
                             alert("Failed to update role. Please try again.");
                         }

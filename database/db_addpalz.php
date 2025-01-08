@@ -68,7 +68,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sssis", $palz_name, $palz_age, $palz_birthday, $created_by, $image_url);
             $stmt->execute();
 
-            // Get the inserted palz_id
             $palz_id = $stmt->insert_id;
 
             // Insert traits into palz_nature table
@@ -100,7 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Commit the transaction
             $connection->commit();
 
-            echo "Palz added successfully!";
             $_SESSION['add_palz'] = "success";
             header("Location:" . BASE_URL . "/index.php");
         } catch (Exception $e) {

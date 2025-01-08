@@ -36,11 +36,8 @@ $stmt->close();
             <!-- Username here -->
             <h1><?php echo htmlspecialchars($username); ?></h1>
         </div>
-        <div class="userdesc">
-            <!-- User description here -->
-        </div>
-        <div class="friendlist">
-            <!-- Friendlist here -->
+        <div class="ownpalz">
+            <!-- Own added Palz here -->
         </div>
     </div>
 

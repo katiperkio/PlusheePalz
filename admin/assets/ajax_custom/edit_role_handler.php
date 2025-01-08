@@ -16,14 +16,12 @@ include '../../../database/connect.php';
 $userId = $_POST['id'] ?? null;
 $newRole = $_POST['role'] ?? null;
 
-// Validate input
 if (!$userId || !$newRole || !in_array($newRole, ['admin', 'guest'])) {
     echo 'error';
     exit();
 }
 
 try {
-    // Prepare the update query
     $sql = "UPDATE users SET role = ? WHERE id = ?";
     $stmt = $connection->prepare($sql);
 

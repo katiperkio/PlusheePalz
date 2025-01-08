@@ -3,16 +3,14 @@
         $(document).on('click', '.edit-status-btn', function(e) {
             e.preventDefault();
 
-            var palzId = $(this).data('id'); // Get the Palz ID
-            var currentStatus = $(this).data('status'); // Get the current status
+            var palzId = $(this).data('id');
+            var currentStatus = $(this).data('status');
 
-            // Ask for the new status
             var newStatus = prompt("Enter new status (published/draft):", currentStatus);
 
-            // Validate the new status
             if (newStatus && (newStatus === 'published' || newStatus === 'draft')) {
                 $.ajax({
-                    url: './assets/ajax_custom/edit_status_handler.php', // Path to backend handler
+                    url: './assets/ajax_custom/edit_status_handler.php',
                     type: 'POST',
                     data: {
                         id: palzId,
@@ -23,7 +21,7 @@
                         console.log("response: ", response);
                         if (response === 'success') {
                             alert("Status updated successfully.");
-                            location.reload(); // Reload to reflect the changes
+                            location.reload();
                         } else {
                             alert("Failed to update status. Please try again.", response);
                         }

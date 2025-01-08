@@ -9,7 +9,6 @@
             console.log('Clicked delete for ID:', entryId, 'Table:', table);
 
             if (confirm('Are you sure you want to delete this entry?')) {
-                // Show loading state (optional)
                 $(this).prop('disabled', true);
 
                 sendDeleteRequest(entryId, table, $(this));
@@ -46,7 +45,6 @@
                     alert("An unexpected error occurred. Please try again.");
                 },
                 complete: function() {
-                    // Re-enable the button after processing
                     buttonElement.prop('disabled', false);
                 }
             });
