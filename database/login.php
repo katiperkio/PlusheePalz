@@ -1,12 +1,10 @@
 <?php
+session_start();
+include('connect.php');
 
-session_start(); //start a session for storing user information
-
-include('connect.php'); //include database connection file which contains database connection code
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user = $_POST['username'];
-    $password = $_POST['password']; // fetch the inputs from login form
+    $password = $_POST['password'];
 
     $stmt = $connection->prepare("SELECT id, username, password, role, email FROM users WHERE username = ?");
     $stmt->bind_param("s", $user);
@@ -15,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $hashed_password = $row['password']; // get the hashed password from db
+        $hashed_password = $row['password'];
 
         if (password_verify($password, $hashed_password)) {
             $_SESSION['username'] = $row['username'];
@@ -23,14 +21,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { //check if the form is submitted
             $_SESSION['role'] = $row['role'];
             $_SESSION['email'] = $row['email'];
 
-            header('Location:' . BASE_URL . '/index.php');
+            header('Location: ' . BASE_URL . '/index.php');
             exit;
         } else {
-            echo "Invalid password";
+            $_SESSION['error_message'] = "Invalid password";
         }
     } else {
-        echo "User not found";
+        $_SESSION['error_message'] = "User not found";
     }
 
     $stmt->close();
+
+    header('Location: ' . BASE_URL . '/index.php');
+    exit;
 }

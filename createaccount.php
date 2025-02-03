@@ -13,6 +13,11 @@ include 'inc/header_inc.php';
         <input type="text" class="form-control" id="email" name="email"><br>
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password" required><br>
+        <?php if (isset($_SESSION['register_error_message'])): ?>
+            <p style="color: red; text-align: center;"><?php echo $_SESSION['register_error_message']; ?></p>
+            <?php unset($_SESSION['register_error_message']); // Clear the message after displaying 
+            ?>
+        <?php endif; ?>
         <div class="py-3">
             <button type="submit" class="btn btn-success btn-block px-2 py-2 register-btn" style="width: 90px;">Join</button>
         </div>
